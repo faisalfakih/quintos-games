@@ -8,6 +8,8 @@ let timer = 0;
 let prevBallY = 0;
 let interval = 10;
 
+let player1Points = 0;
+let player2Points = 0;
 // code in the setup function gets run once at the start of the game
 
 function setup() {
@@ -60,12 +62,22 @@ ww....ww
 
 // code in the draw function gets run 60 times per second
 function draw() {
+	txt(player1Points, 3, 1);
+	txt(player2Points, 3, 30);
 	background('b');
 
 	ball.speed += 0.005;
+
 	if (ball.x > 256 || ball.x < 0) {
 		timer += 1;
+
 		if (timer > 60) {
+			if (ball.x < 0) {
+				player1Points += 1;
+			}
+			if (ball.x > 256) {
+				player2Points += 1;
+			}
 			ball.x = 128;
 			ball.y = 96;
 			ball.speed = 10.5;
@@ -86,4 +98,7 @@ function draw() {
 	if (kb.pressing('down2')) {
 		pR.y += 5;
 	}
+	/*
+	pL.moveTowards(pL.x, ball.y, 0.1);
+	pR.moveTowards(pR.x, ball.y, 0.1); */
 }
